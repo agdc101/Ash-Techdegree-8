@@ -1,0 +1,138 @@
+
+* {
+    font-family: 'Playfair Display', serif;
+    box-sizing: border-box;
+    /* border: 1px solid red; */
+}
+
+/* ----------------------------------------------- */
+.container {
+    max-width: 1281px;
+}
+main,
+header,
+.overlay {
+    background-color: rgb(247, 247, 247);
+}
+h1 {
+    font-size: 1.5rem;
+    color: rgb(99, 99, 99);
+    margin: 0 0 0 3rem;
+    padding-top: 0.5rem;
+}
+img {
+    height: 110px;
+    width: 110px;
+    border-radius: 50%;
+    margin: auto 0 auto auto;
+}
+.employee {
+    margin: 1rem 0.5rem;
+    padding: 8px;
+    border: 2px solid lightgray;
+    border-radius: 6px;
+    background-color: #fff;
+}
+.flex-card {
+    display: flex;
+    padding: 1rem 0;
+}
+.flex-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 0 1.8rem;
+    font-size: 0.9rem;
+}
+h2 {
+    font-size: 1.1rem;
+}
+h2,
+#email {
+    margin-bottom: 0.5rem;
+}
+
+/* --------------- MODAL STYLES ----------------- */
+button {
+    width: 1.7rem;
+}
+.details {
+    border-top: 1px solid rgb(179, 179, 179);
+}
+.overlay {
+    width: 35%;
+    margin: auto;
+    border: 2px solid tomato;
+    border-radius: 6px;
+}
+.overlay span {
+    font-size: 0.9rem;
+}
+.modal {
+    width: 90%;
+    margin: 0 auto;
+}
+.modal h2 {
+    font-size: 1.1rem;
+}
+.modal,
+.details {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.modal span,
+.details span {
+    margin: 0.5rem 0;
+}
+.modal-pic {
+    margin: 0 auto;
+}
+
+/* ----------------------------------------------- */
+@media (min-width: 425px) {
+    img {
+        width: 125px;
+        height: 125px;
+    }
+    
+}
+
+@media (min-width: 600px) {
+    .overlay {
+        width: 30%;
+    }
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 95%;
+        margin: 0 auto;
+    }
+    .employee {
+        width: 45%;
+        margin: 1.1rem auto;
+    }
+    img {
+        width: 110px;
+        height: 110px;
+    }
+    h2 {
+        font-size: 1rem;
+    }
+    .flex-list {
+        margin-left: 0.55rem;
+        font-size: 0.75rem;
+    }
+    
+}
+
+@media (min-width: 1025px) {
+    .flex-list {
+        margin-left: 1.8rem;
+    }
+    .employee {
+        width: 30%;
+    }
+    .overlay {
+        width: 28%;
+    }
+}
