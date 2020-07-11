@@ -2,25 +2,34 @@
 * {
     font-family: 'Playfair Display', serif;
     box-sizing: border-box;
-    /* border: 1px solid red; */
 }
 
 /* ----------------------------------------------- */
+/* header {
+    display: flex;
+    justify-content: space-between;
+} */
+#search-bar {
+    display: block;
+    margin: 0 auto;
+    height: 30px;
+    width: 80%;
+}
 body {
     position: relative;
 }
 .container {
     max-width: 1281px;
 }
-main,
-header,
+body,
 .overlay {
     background-color: rgb(247, 247, 247);
 }
 h1 {
-    font-size: 1.5rem;
+    text-align: center;
+    font-size: 1.3rem;
     color: rgb(99, 99, 99);
-    margin: 0 0 0 3rem;
+    margin: 0 auto 1rem auto;
     padding-top: 0.5rem;
 }
 img {
@@ -35,6 +44,9 @@ img {
     border: 2px solid lightgray;
     border-radius: 6px;
     background-color: #fff;
+}
+.employee:hover {
+    background-color: rgb(219, 219, 219);
 }
 .flex-card {
     display: flex;
@@ -79,9 +91,11 @@ button {
     font-size: 0.9rem;
 }
 .modal {
+    position: fixed;
+    top: 20%;
+    left: 15%;
     width: 70%;
     max-width: 380px;
-    margin: 125px auto 0 auto;
     background: #fff;
     border-radius: 8px;
 }
@@ -110,12 +124,13 @@ button {
     img {
         width: 125px;
         height: 125px;
-    }
-    
+    }   
 }
 
 @media (min-width: 600px) {
     .modal {
+        top: 25%;
+        left: 25%;
         width: 50%;
     }
     .container {
@@ -143,10 +158,21 @@ button {
 }
 
 @media (min-width: 1025px) {
+    header {
+        padding-top: 0.8rem;
+        display: flex;
+    }
+    #search-bar {
+        width: 30%;
+        margin: auto;
+    }
     .flex-list {
         margin-left: 1.8rem;
     }
     .employee {
         width: 30%;
+    }
+    .modal {
+        left: 35%;
     }
 }
