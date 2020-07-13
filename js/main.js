@@ -6,12 +6,9 @@ const url = 'https://randomuser.me/api/?results=12';
 const modalContent = document.querySelector('.modal-content');
 const closeModal = document.querySelector('.close-modal');
 const searchBar = document.querySelector('#search-bar');
-const employees = document.querySelectorAll('.employee');
-const employeeNames = document.querySelectorAll('.flex-list h2');
 let employeesArray = [];
 // ------ ------- ---- --------------- //
 // ---- FETCH API AND RENDER HTML ---- //
-
 getJson(url)
     .then(data => data.results)
     .then(data => displayEmployees(data));
@@ -92,12 +89,20 @@ closeModal.addEventListener('click', () => {
 
 // ------ ------- ---- --------------- //
 // ------------SEARCH BAR------------- //
-searchBar.addEventListener('keyup', () => {     
-    employeeNames.forEach( employee => {
+searchBar.addEventListener('keyup', () => {
+    const employeeNames = document.querySelectorAll('.flex-list h2');
+    const search = searchBar.value.toLowerCase();
 
-    })
-    const search = searchBar.value;
-    console.log(search);
-    console.log(employee);
-    
+    employeeNames.forEach(employee => {
+        let employeeResult = employee.textContent.toLowerCase();
+        let employeeDiv = employee.closest('.employee')
+        if (!employeeResult.includes(search)) {
+            employeeDiv.style.transform = 'scale(0)'
+            setTimeout(() => {employeeDiv.style.display = 'none'; }, 600)
+            
+        } else {
+            employeeDiv.style.display = '';
+            employeeDiv.style.transform = 'scale(1)'
+        }
+    })   
 });
