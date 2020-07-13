@@ -38,7 +38,7 @@ const displayEmployees = data => {
                 <div class= 'flex-list'>
                     <h2>${name}</h2>
                     <span id= 'email'>${email}</span>
-                    <span>${city}</span>
+                    <span id= 'city'>${city}</span>
                 </div>
             </div>
         </div>
@@ -53,7 +53,6 @@ const displayEmployees = data => {
 employeeContainer.addEventListener('click', (e) => {   
     if(e.target !== employeeContainer) {
      overlay.style.display = 'block';    
-     console.log(employeesArray[1]);
      const employeeClicked = e.target.closest('.employee');
      const employeeIndex = employeeClicked.getAttribute('data-index');
      buildModal(employeeIndex);
@@ -67,6 +66,8 @@ const buildModal = index => {
     <h2>${modalEmployee.name.first} ${modalEmployee.name.last}</h2>
     <span>${modalEmployee.email}</span>
     <span>${modalEmployee.location.city}</span>
+    <img class= 'prev' src='imgs/prev copy.png'>
+    <img class= 'next' src='imgs/next copy.png'>
     <div class= 'details'>
         <span>${modalEmployee.phone}</span>
         <span>${modalEmployee.location.street.number} ${modalEmployee.location.street.name}</span>
