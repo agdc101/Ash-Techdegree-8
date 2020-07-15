@@ -1,16 +1,20 @@
 
-// ----------- Variables ------------- //
+// ----------- VARIABLES ------------- //
 const employeeContainer = document.querySelector('.container');
 const overlay = document.querySelector('.hidden');
 const url = 'https://randomuser.me/api/?results=12';
 const modalContent = document.querySelector('.modal-content');
 const closeModal = document.querySelector('.close-modal');
 const searchBar = document.querySelector('#search-bar');
+const modalNav = document.querySelector('.modal-nav');
+let originalArray = [];
 let employeesArray = [];
+let searchArray = [];
 // ------ ------- ---- --------------- //
 // ---- FETCH API AND RENDER HTML ---- //
 getJson(url)
     .then(data => data.results)
+    .then(data => originalArray = data)
     .then(data => displayEmployees(data));
 
 async function getJson(url) {
@@ -22,23 +26,18 @@ async function getJson(url) {
         throw error;
     }
 };
-
 const displayEmployees = data => {
     let employeeHTML = '';
     employeesArray = data;
     data.forEach( (data, index) => {        
-        let name = `${data.name.first} ${data.name.last}`;       
-        let email = data.email;
-        let city = data.location.city;
-        let picture = data.picture.medium;
         employeeHTML += `
         <div class= 'employee' data-index= '${index}'>
             <div class= 'flex-card'>
-                <img src='${picture}'>
+                <img src='${data.picture.medium}'>
                 <div class= 'flex-list'>
-                    <h2>${name}</h2>
-                    <span id= 'email'>${email}</span>
-                    <span id= 'city'>${city}</span>
+                    <h2>${data.name.first} ${data.name.last}</h2>
+                    <span id= 'email'>${data.email}</span>
+                    <span id= 'city'>${data.location.city}</span>
                 </div>
             </div>
         </div>
@@ -49,7 +48,6 @@ const displayEmployees = data => {
 
 // ------ ------- ---- --------------- //
 // -----------MODAL EVENT------------- //
-
 employeeContainer.addEventListener('click', (e) => {   
     if(e.target !== employeeContainer) {
      overlay.style.display = 'block';    
@@ -61,49 +59,77 @@ employeeContainer.addEventListener('click', (e) => {
 
 const buildModal = index => {
     let modalEmployee = employeesArray[index];
-    let modalHTML = 
+    let modalHTML = '';
+/* --- conditions testing whether prev or next arrows are needed depending on index position and 
+the length of the array --- */
+    if (parseInt(index) == 0 && employeesArray.length > 1) {
+        modalHTML = 
+        `<div class= 'modal-nav'>
+            <img data-index= ${index} class= 'margin-left' id= 'next' src='imgs/next copy.png'>       
+        </div>`
+    } else if (parseInt(index) == employeesArray.length - 1 && employeesArray.length > 1) {
+        modalHTML = 
+        `<div class= 'modal-nav'>
+            <img data-index= ${index} class= 'margin-right' id= 'prev' src='imgs/prev copy.png'>
+        </div>`
+    } else if (parseInt(index) > 0 && parseInt(index) < employeesArray.length - 1){
+        modalHTML = 
+        `<div class= 'modal-nav'>
+            <img data-index= ${index} id= 'prev' src='imgs/prev copy.png'>
+            <img data-index= ${index} id= 'next' src='imgs/next copy.png'>
+        </div>`
+    }
+    modalHTML += 
     `<img class= 'modal-pic' src= '${modalEmployee.picture.large}'>
     <h2>${modalEmployee.name.first} ${modalEmployee.name.last}</h2>
     <span>${modalEmployee.email}</span>
     <span>${modalEmployee.location.city}</span>
-    <img class= 'prev' src='imgs/prev copy.png'>
-    <img class= 'next' src='imgs/next copy.png'>
+
     <div class= 'details'>
         <span>${modalEmployee.phone}</span>
         <span>${modalEmployee.location.street.number} ${modalEmployee.location.street.name}</span>
         <span>birthday: ${createDob(modalEmployee.dob.date)}</span>
     </div>
     `;
+   
     modalContent.innerHTML = modalHTML;
 }
-
 const createDob = data => {
+/*-- This function just changes the employees DOB details into the correct format --*/
     let year = data.substring(0, 4);
     let day = data.substring(8, 10);
     let month = data.substring(5, 7);
     return `${day}/${month}/${year}`;
 }
-
 closeModal.addEventListener('click', () => {
     overlay.style.display = 'none'; 
 })
-
 // ------ ------- ---- --------------- //
-// ------------SEARCH BAR------------- //
-searchBar.addEventListener('keyup', () => {
-    const employeeNames = document.querySelectorAll('.flex-list h2');
-    const search = searchBar.value.toLowerCase();
+// --------SEARCH BAR RE-DESIGN-------- //
 
-    employeeNames.forEach(employee => {
-        let employeeResult = employee.textContent.toLowerCase();
-        let employeeDiv = employee.closest('.employee')
-        if (!employeeResult.includes(search)) {
-            employeeDiv.style.transform = 'scale(0)'
-            setTimeout(() => {employeeDiv.style.display = 'none'; }, 600)
-            
-        } else {
-            employeeDiv.style.display = '';
-            employeeDiv.style.transform = 'scale(1)'
-        }
-    })   
-});
+searchBar.addEventListener('keyup', () => {
+// the original 12 employees are sent to the function after every key press to reset the page //
+    displayEmployees(originalArray);
+    const search = searchBar.value.toLowerCase();
+    searchArray = employeesArray.filter(employee => {
+        let name = `${employee.name.first} ${employee.name.last}`;
+            if(name.toLowerCase().includes(search)) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+        displayEmployees(searchArray);
+})
+// ------ ------- ---- --------------- //
+// ---------MODAL ARROW NAVS---------- //
+modalContent.addEventListener('click', (e) => {
+    let arrayVal = e.target.getAttribute('data-index');    
+    if (e.target.id === 'next') {   
+        arrayVal = parseInt(arrayVal) + 1; 
+        buildModal(arrayVal);             
+    } else if (e.target.id === 'prev') {
+        arrayVal = parseInt(arrayVal) - 1;
+        buildModal(arrayVal);
+    }
+})

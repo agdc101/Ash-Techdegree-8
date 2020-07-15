@@ -5,7 +5,6 @@
 }
 
 /* ----------------------------------------------- */
-
 #search-bar {
     display: block;
     margin: 0 auto;
@@ -14,8 +13,11 @@
 }
 body {
     position: relative;
+    min-height: 750px;
 }
 .container {
+    margin: auto;
+    width: 95%;
     max-width: 1281px;
 }
 body,
@@ -33,7 +35,6 @@ img {
     height: 110px;
     width: 110px;
     border-radius: 50%;
-    margin: auto 0 auto auto;
 }
 .employee {
     margin: 1rem 0.5rem;
@@ -41,7 +42,6 @@ img {
     border: 2px solid lightgray;
     border-radius: 6px;
     background-color: #fff;
-    transition: transform 0.6s ease-out;
 }
 .employee:hover {
     background-color: rgb(219, 219, 219);
@@ -119,26 +119,43 @@ button {
     margin: 0 auto;
 }
 .modal-content {
-    padding: 14px 14px 26px 14px;
+    padding: 0 14px 26px 14px;
 }
-.prev,
-.next {
+#prev,
+#next {
     position: relative;
     width: 2rem;
     height: 2rem;
+    transition: transform ease-in 0.4s,
+                background-color ease-out 0.3s;
 }
-.prev {
-    right: 256px;
-    bottom: 150px;
+#next {
+    left: 100px;
 }
-.next {
-    bottom: 180px;
+#prev {
+    right: 100px;
+}
+#next,
+#prev {
+    top: 120px;
 }
 .modal-pic {
     width: 125px;
     height: 125px;
 }
-/* ----------------------------------------------- */
+#prev:hover,
+#next:hover {
+    transform: scale(1.2);
+    background-color: rgb(179, 179, 179);
+}
+.margin-left {
+    margin-left: 3rem;
+}
+.margin-right {
+    margin-right: 3rem;
+}
+
+/* -----------MEDIA QUERIES----------------- */
 @media (min-width: 425px) {
     img {
         width: 125px;
@@ -147,13 +164,25 @@ button {
     #email,
     #city,
     .modal span {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+    }
+    .modal-pic {
+        width: 160px;
+        height: 160px;
     }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 570px) {
+    .flex-list {
+        margin: 0 1rem 0 1.8rem;
+    }
+    .flex-card {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+@media (min-width: 736px) {
     .modal {
-        top: 30%;
         left: 20%;
         width: 400px;
     }
@@ -170,6 +199,7 @@ button {
     img {
         width: 110px;
         height: 110px;
+        margin: auto 0 auto 0.75rem;
     }
     h2 {
         font-size: 1rem;
@@ -178,8 +208,8 @@ button {
         margin-left: 0.55rem;
         font-size: 0.75rem;
     }
-    .prev {
-        right: 315px;
+    .flex-card {
+        width: 95%;
     }
     #email,
     #city {
@@ -192,7 +222,7 @@ button {
     }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1112px) {
     header {
         padding-top: 0.8rem;
         display: flex;
@@ -202,19 +232,22 @@ button {
         margin: auto;
     }
     .flex-list {
-        margin-left: 1.8rem;
+        margin-left: 1rem;
     }
     .employee {
-        width: 30%;
+        width: 31.5%;
     }
     .modal {
         left: 35%;
+    }
+    img {
+        margin: auto 0.25rem auto 0.4rem;
     }
 }
 
 @media (min-width: 1280px) {
     #email,
     #city {
-        font-size: .80rem;
+        font-size: 0.8rem;
     }
 }
