@@ -104,11 +104,6 @@ const createDob = data => {
 }
 closeModal.addEventListener('click', () => {
     overlay.style.display = 'none'; 
-
-    // const scrollY = body.style.top;
-    // body.style.position = '';
-    // body.style.top = '';
-    // window.scrollTo(0, parseInt(scrollY || '0') * -1);
 })
 // ------ ------- ---- --------------- //
 // --------SEARCH BAR RE-DESIGN-------- //
