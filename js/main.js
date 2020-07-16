@@ -7,6 +7,7 @@ const modalContent = document.querySelector('.modal-content');
 const closeModal = document.querySelector('.close-modal');
 const searchBar = document.querySelector('#search-bar');
 const modalNav = document.querySelector('.modal-nav');
+const body = document.querySelector('body');
 let originalArray = [];
 let employeesArray = [];
 let searchArray = [];
@@ -103,10 +104,14 @@ const createDob = data => {
 }
 closeModal.addEventListener('click', () => {
     overlay.style.display = 'none'; 
+
+    // const scrollY = body.style.top;
+    // body.style.position = '';
+    // body.style.top = '';
+    // window.scrollTo(0, parseInt(scrollY || '0') * -1);
 })
 // ------ ------- ---- --------------- //
 // --------SEARCH BAR RE-DESIGN-------- //
-
 searchBar.addEventListener('keyup', () => {
 // the original 12 employees are sent to the function after every key press to reset the page //
     displayEmployees(originalArray);

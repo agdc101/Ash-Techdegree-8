@@ -11,10 +11,9 @@
     height: 30px;
     width: 80%;
 }
-body {
-    position: relative;
-    min-height: 750px;
-}
+/* body {
+    position: fixed;
+} */
 .container {
     margin: auto;
     width: 95%;
@@ -82,7 +81,7 @@ button {
     border-top: 1px solid rgb(179, 179, 179);
 }
 .overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
