@@ -28,6 +28,7 @@ async function getJson(url) {
     }
 };
 const displayEmployees = data => {
+    console.log(data);
     let employeeHTML = '';
     employeesArray = data;
     data.forEach( (data, index) => {        
@@ -88,7 +89,7 @@ the length of the array --- */
 
     <div class= 'details'>
         <span>${modalEmployee.phone}</span>
-        <span>${modalEmployee.location.street.number} ${modalEmployee.location.street.name}</span>
+        <span>${modalEmployee.location.street.number} ${modalEmployee.location.street.name}, ${modalEmployee.location.state} ${modalEmployee.location.postcode}</span>
         <span>birthday: ${createDob(modalEmployee.dob.date)}</span>
     </div>
     `;
